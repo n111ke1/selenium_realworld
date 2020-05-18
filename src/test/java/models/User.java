@@ -13,6 +13,12 @@ public class User {
         this.password = password;
     }
 
+    public User(String username, String email, String password) {
+        this.userName = username;
+        this.email = email;
+        this.password = password;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -42,6 +48,9 @@ public class User {
         this.userName = "userTest" + new Random().nextInt(10000);
         this.email =userName + "@mail.com";
         this.password = "qwerty12345";
+    }
+    public User defaultUser() {
+        return new User("niktest","niktest@email.com","qwerty12345");
     }
 
 
