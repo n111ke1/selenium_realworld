@@ -21,12 +21,12 @@ public class MainPage extends BasePage {
     }
 
     public SignInPage clickSignIn() {
-        driver.findElement(registrationForm).click();
+        driver.findElement(loginForm).click();
         return new SignInPage(driver);
     }
 
     public SignUpPage clickSignUp() {
-        driver.findElement(loginForm).click();
+        driver.findElement(registrationForm).click();
         return new SignUpPage(driver);
     }
 
