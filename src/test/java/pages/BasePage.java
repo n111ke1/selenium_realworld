@@ -7,7 +7,6 @@ import utils.Waits;
 
 public class BasePage {
 
-
     protected WebDriver driver;
     protected Waits waits;
 

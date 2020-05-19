@@ -15,20 +15,26 @@ public class NewArticlePage extends BasePage {
     private By tagsField = By.cssSelector(".form-group:nth-child(4)>input");
     private By publishArticleBtn = By.cssSelector("[type='button']");
 
-    public void inputArticleTitle(String title) {
+
+
+    public NewArticlePage inputArticleTitle(String title) {
         inputText(titleField, title);
+        return this;
     }
 
-    public void inputWhatArticleAbout(String whatAbout) {
+    public NewArticlePage inputWhatArticleAbout(String whatAbout) {
         inputText(whatAboutField, whatAbout);
+        return this;
     }
 
-    public void inputArticle(String article) {
+    public NewArticlePage inputArticle(String article) {
         inputText(articleBodyField, article);
+        return this;
     }
 
-    public void inputTags(String tags) {
+    public NewArticlePage inputTags(String tags) {
         inputText(tagsField, tags);
+        return this;
     }
 
     public ArticleDetailsPage clickPublishArticleBtn() {
@@ -36,15 +42,14 @@ public class NewArticlePage extends BasePage {
         return new ArticleDetailsPage(driver);
     }
 
-//    public void createNewDefaultPost(){
-//
-//        element(newPostTab).click();
-//        printText(element(articleTitleField),"TestArticleTitle");
-//        printText(element(articleAboutField), "about article");
-//        printText(element(articleText), "Text text text");
-//        printText(element(articleTags), "@tags");
-//        element(publishArticleBtn).click();
-//    }
+    public ArticleDetailsPage createNewDefaultPost(){
+        inputArticleTitle("TestArticleTitle");
+        inputWhatArticleAbout("about article");
+        inputArticle("Text text text");
+        inputTags("@tags");
+        return clickPublishArticleBtn();
+
+    }
 
 
 }

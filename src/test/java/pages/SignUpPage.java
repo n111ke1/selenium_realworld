@@ -12,25 +12,52 @@ public class SignUpPage extends BasePage {
     }
 
     By loginForm = cssSelector(".navbar-nav .nav-item > a[href='#login']");
-    By emailField = cssSelector("input[type='email']");
-    By passwordField = cssSelector("input[type='password']");
+    By inputEmailField = cssSelector("input[type='email']");
+    By inputPasswordField = cssSelector("input[type='password']");
     By registrationForm = cssSelector(".navbar-nav .nav-item > a[href='#register']");
+    By usernameField = cssSelector("input[type='text']");
+    By submitFormBtn = cssSelector("button[type='submit']");
 
-    public void inputEmail(String email) {
-        WebElement emailField = signUpForm().findElement(By.cssSelector("input[type='email']"));
+    By errorEmail = cssSelector(".error-messages li:nth-child(1)");
+    By errorPass = cssSelector(".error-messages li:nth-child(2)");
+    By errorUser = cssSelector(".error-messages li:nth-child(3)");
+
+    public SignUpPage inputEmail(String email) {
+        WebElement emailField = driver.findElement(inputEmailField);
         inputText(emailField, email);
+        return this;
     }
 
-    public void inputPassword(String password) {
-        WebElement passwordField = signUpForm().findElement(By.cssSelector("input[type='password']"));
+    public SignUpPage inputPassword(String password) {
+        WebElement passwordField = driver.findElement(inputPasswordField);
         inputText(passwordField, password);
+        return this;
     }
 
-    public WebElement signUpForm(){
-
-       return driver.findElement(registrationForm);
-
+    public SignUpPage inputUserName(String username) {
+        WebElement passwordField = driver.findElement(usernameField);
+        inputText(passwordField, username);
+        return this;
     }
+
+    public HomePage clickSignInBtn(){
+        driver.findElement(submitFormBtn).click();
+        return new HomePage(driver);
+    }
+
+    public String getErrorUserNameText(){
+        return getTextFromElement(driver.findElement(errorUser));
+    }
+
+    public String getErrorEmailText(){
+        return getTextFromElement(driver.findElement(errorEmail));
+    }
+
+    public String getErrorPassText(){
+        return getTextFromElement(driver.findElement(errorPass));
+    }
+
+
 
 
 }
