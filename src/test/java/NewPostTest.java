@@ -1,50 +1,63 @@
+import models.User;
+import models.UserData;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.ArticleDetailsPage;
+import pages.HomePage;
+import pages.MainPage;
+import pages.ProfilePage;
 
 public class NewPostTest extends BaseTest {
 
-    By editPostBtn = By.cssSelector(".btn-outline-secondary");
-    By deletePostBtn = By.cssSelector("button.btn-outline-danger");
-    By createdPostName = By.cssSelector(".article-page .banner h1");
+   private User user = UserData.defaultUser();
 
+    @BeforeTest
+    public void beforeTest(){
+        new MainPage(driver)
+                .clickSignIn()
+                .login(user.getEmail(), user.getPassword());
+    }
 
     @Test
     public void createNewPostTest(){
-        loginUser();
-        element(newPostTab).click();
-    printText(element(articleTitleField),"TestArticleTitle");
-    printText(element(articleAboutField), "about article");
-    printText(element(articleText), "Text text text");
-    printText(element(articleTags), "@tags");
-    element(publishArticleBtn).click();
-    element(createdPostName).getText();
-        Assertions.assertThat(createdPostName).isEqualTo("TestArticleTitle");
+        beforeTest();
+        new HomePage(driver)
+                .clickNewPost()
+                .createNewDefaultPost();
+        Assertions.assertThat(new ArticleDetailsPage(driver).getArticleTitleText()).isEqualTo("TestArticleTitle");
+        new ArticleDetailsPage(driver).clickDeleteArticle();
+
     }
 
     @Test
     public void editExistsPost(){
-        createNewDefaultPost();
-        element(userProfileTab).click();
-        WebElement el = driver.findElements(By.cssSelector(".article-preview .preview-link")).get(0);
-        el.click();
-        element(editPostBtn).click();
-        printText(element(articleTitleField),"SomeNewTitle");
-        printText(element(articleAboutField), "about article");
-        printText(element(articleText), "changed text text text");
-        element(publishArticleBtn).click();
-        Assertions.assertThat(element(createdPostName).getText()).isEqualTo("SomeNewTitle");
-
+        beforeTest();
+        new HomePage(driver)
+                .clickNewPost()
+                .createNewDefaultPost()
+                .clickEditPost()
+                .inputArticleTitle("SomeNewTitle")
+                .inputWhatArticleAbout( "about article")
+                .inputArticle("changed text text text")
+                .inputTags("@newTag")
+                .clickPublishArticleBtn();
+        Assertions.assertThat(new ArticleDetailsPage(driver).getArticleTitleText()).isEqualTo("SomeNewTitle");
+        new ArticleDetailsPage(driver).clickDeleteArticle();
     }
 
     @Test
     public void deletePost(){
-        By previewPostName = By.cssSelector(".preview-link h1");
-        createNewDefaultPost();
-        element(deletePostBtn).click();
-        element(userProfileTab).click();
-        Assertions.assertThat(element(previewPostName)).isNull();
+        beforeTest();
+        new HomePage(driver)
+                .clickNewPost()
+                .createNewDefaultPost()
+                .clickDeleteArticle();
+        new HomePage(driver)
+                .clickProfile();
+        Assertions.assertThat(new ProfilePage(driver).getArticlesSize()).isNull();
 
     }
 

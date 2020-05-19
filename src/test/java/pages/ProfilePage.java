@@ -15,4 +15,10 @@ public class ProfilePage extends BasePage {
         return driver.findElements(articles).size();
     }
 
+    By previewPostName = By.cssSelector(".preview-link h1");
+
+    public String getPreviewArticleText(){
+        return getTextFromElement(driver.findElement(previewPostName));
+    }
+
 }

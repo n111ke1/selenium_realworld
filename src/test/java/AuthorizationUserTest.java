@@ -11,8 +11,6 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class AuthorizationUserTest extends BaseTest{
 
-    By usernameField = cssSelector("input[type='text']");
-    By errorLoginFields = cssSelector(".error-messages");
     private User user = UserData.defaultUser();
 
 
@@ -24,7 +22,6 @@ public class AuthorizationUserTest extends BaseTest{
         new SignInPage(driver)
                 .login(user.getEmail(), user.getPassword());
         assertThat(new HomePage(driver).isUserLoggedIn(user.getUserName())).isTrue();
-
     }
 
     @Test
@@ -36,6 +33,4 @@ public class AuthorizationUserTest extends BaseTest{
     }
 
 
-
-    
 }
