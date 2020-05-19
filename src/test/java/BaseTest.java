@@ -9,11 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.MainPage;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
-import static org.openqa.selenium.By.cssSelector;
 
 public class BaseTest {
 
