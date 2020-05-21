@@ -1,14 +1,9 @@
 import models.User;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.MainPage;
 import pages.SignUpPage;
-
-import java.util.Random;
-
-import static org.openqa.selenium.By.cssSelector;
 
 public class RegistrationTest extends BaseTest {
     User user;
@@ -18,11 +13,11 @@ public class RegistrationTest extends BaseTest {
         new MainPage(driver)
                 .clickSignUp();
         new SignUpPage(driver)
-                .inputUserName(user.getUserName())
+                .inputUserName(user.getUsername())
                 .inputEmail(user.getEmail())
                 .inputPassword(user.getPassword())
                 .clickSignInBtn();
-        Assertions.assertThat(new HomePage(driver).isUserLoggedIn(user.getUserName()));
+        Assertions.assertThat(new HomePage(driver).isUserLoggedIn(user.getUsername()));
     }
 
     @Test

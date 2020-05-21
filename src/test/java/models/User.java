@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class User {
 
-    private String userName;
+
+    private String username;
     private String email;
     private String password;
 
@@ -14,13 +15,14 @@ public class User {
     }
 
     public User(String username, String email, String password) {
-        this.userName = username;
+        this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setEmail(String email) {
@@ -32,8 +34,8 @@ public class User {
     }
 
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {
@@ -44,9 +46,9 @@ public class User {
         return password;
     }
 
-    public User() {
-        this.userName = "userTest" + new Random().nextInt(10000);
-        this.email =userName + "@mail.com";
+    public User () {
+        this.username = "userTest" + new Random().nextInt(10000);
+        this.email = username + "@mail.com";
         this.password = "qwerty12345";
     }
     public User defaultUser() {

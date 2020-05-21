@@ -18,7 +18,7 @@ public class AuthorizationUserTest extends BaseTest{
                 .clickSignIn();
         new SignInPage(driver)
                 .login(user.getEmail(), user.getPassword());
-        assertThat(new HomePage(driver).isUserLoggedIn(user.getUserName())).isTrue();
+        assertThat(new HomePage(driver).isUserLoggedIn(user.getUsername())).isTrue();
     }
 
     @Test(enabled = false)
