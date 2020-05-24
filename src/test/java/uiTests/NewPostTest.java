@@ -1,8 +1,8 @@
+package uiTests;
+
 import models.User;
 import models.UserData;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.ArticleDetailsPage;

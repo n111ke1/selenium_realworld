@@ -1,15 +1,23 @@
+package uiTests;
+
 import models.User;
 import models.UserData;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.MainPage;
 import pages.SignInPage;
+import serviceApi.UserService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AuthorizationUserTest extends BaseTest{
+public class AuthorizationUserTest extends BaseTest {
 
     private User user = UserData.defaultUser();
+    private UserService userService = new UserService();
+
+    public void login(){
+        user = userService.login();
+    }
 
 
     @Test

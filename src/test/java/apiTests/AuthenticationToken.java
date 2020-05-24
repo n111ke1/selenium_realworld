@@ -1,4 +1,4 @@
-package api;
+package apiTests;
 
 public class AuthenticationToken {
     private String token;

@@ -1,10 +1,9 @@
 package models;
 
-import lombok.Data;
+public class UserResponce {
 
-@Data
-public class ApiUser {
     private User user;
+
 
     public User getUser() {
         return user;
@@ -13,5 +12,4 @@ public class ApiUser {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

@@ -9,7 +9,7 @@
 
     <test name="Login">
         <classes>
-            <class name="AuthorizationUserTest"/>
+            <class name="uiTests.AuthorizationUserTest"/>
         </classes>
     </test>
 

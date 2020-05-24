@@ -5,8 +5,9 @@ import com.github.javafaker.Faker;
 public class UserData {
 
     public static User defaultUser() {
-        return new User("niktest","niktest@email.com","qwerty12345");
+        return new User("niktest@email.com","qwerty12345");
     }
+
 
 
     public static User randomUser() {
