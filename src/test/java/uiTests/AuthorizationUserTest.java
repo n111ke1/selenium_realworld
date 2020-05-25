@@ -16,7 +16,7 @@ public class AuthorizationUserTest extends BaseTest {
     private UserService userService = new UserService();
 
     public void login(){
-        user = userService.login();
+//        user = userService.login();
     }
 
 

@@ -1,7 +1,10 @@
 package pages;
 
+import models.Article;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Arrays;
 
 public class NewArticlePage extends BasePage {
 
@@ -40,6 +43,15 @@ public class NewArticlePage extends BasePage {
     public ArticleDetailsPage clickPublishArticleBtn() {
         driver.findElement(publishArticleBtn).click();
         return new ArticleDetailsPage(driver);
+    }
+
+    public Article createNewArticle(){
+        Article article = new Article();
+        article.setTitle("TestArticleTitle");
+        article.setDescription("about article");
+        article.setBody("Text text text");
+        article.setTagList(Arrays.asList("tests", "hohho"));
+        return article;
     }
 
     public ArticleDetailsPage createNewDefaultPost(){

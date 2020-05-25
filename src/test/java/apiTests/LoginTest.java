@@ -19,14 +19,14 @@ public class LoginTest extends BaseApiTest{
 
        User userAuth =  RestAssured
                 .given()
-                .body(userResponce)
+                    .body(userResponce)
                 .when()
-                .post("/users/login")
+                    .post("/users/login")
                 .then()
-                .statusCode(200)
-                .extract().body()
-                .as(UserResponce.class)
-                .getUser();
+                    .statusCode(200)
+                    .extract().body()
+                    .as(UserResponce.class)
+                    .getUser();
         System.out.println(userAuth);
                 assertThat(userAuth.getEmail()).isEqualToIgnoringCase(defUser.getEmail());
     }

@@ -31,5 +31,6 @@ public class Article {
     @JsonProperty("author")
     private Author author;
 
-
 }
+
+

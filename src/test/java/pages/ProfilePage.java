@@ -21,4 +21,10 @@ public class ProfilePage extends BasePage {
         return getTextFromElement(driver.findElement(previewPostName));
     }
 
+    public ArticleDetailsPage clickOnArticleTitle(){
+        driver.findElement(By.cssSelector(".article-preview .preview-link")).click();
+        return new ArticleDetailsPage(driver);
+
+    }
+
 }

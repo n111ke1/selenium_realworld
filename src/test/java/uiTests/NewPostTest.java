@@ -1,43 +1,52 @@
 package uiTests;
 
+import models.Article;
 import models.User;
-import models.UserData;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.ArticleDetailsPage;
-import pages.HomePage;
-import pages.MainPage;
-import pages.ProfilePage;
+import pages.*;
+import serviceApi.ArticleService;
+import serviceApi.UserService;
 
 public class NewPostTest extends BaseTest {
 
-   private User user = UserData.defaultUser();
+   private User user;
+    private UserService userService = new UserService();
+    private Article article;
 
-    @BeforeTest
+    @BeforeMethod
     public void beforeTest(){
+        user = userService.login();
+    ArticleService articleService = new ArticleService(user.getToken());
+    article =  articleService.createArticle(new NewArticlePage(driver).createNewArticle());
         new MainPage(driver)
                 .clickSignIn()
                 .login(user.getEmail(), user.getPassword());
-    }
 
-    @Test
-    public void createNewPostTest(){
-        beforeTest();
-        new HomePage(driver)
-                .clickNewPost()
-                .createNewDefaultPost();
         Assertions.assertThat(new ArticleDetailsPage(driver).getArticleTitleText()).isEqualTo("TestArticleTitle");
-        new ArticleDetailsPage(driver).clickDeleteArticle();
 
     }
+
+//    @Test
+//    public void createNewPostTest(){
+//        new HomePage(driver)
+//                .clickNewPost()
+//                .createNewDefaultPost();
+//        Assertions.assertThat(new ArticleDetailsPage(driver).getArticleTitleText()).isEqualTo("TestArticleTitle");
+//        new ArticleDetailsPage(driver).clickDeleteArticle();
+//
+//    }
 
     @Test
     public void editExistsPost(){
-        beforeTest();
-        new HomePage(driver)
-                .clickNewPost()
-                .createNewDefaultPost()
+//        new HomePage(driver);
+//                .clickNewPost()
+//                .createNewDefaultPost()
+        new  HomePage(driver)
+                .clickProfile()
+                .clickOnArticleTitle();
+        new ArticleDetailsPage(driver)
                 .clickEditPost()
                 .inputArticleTitle("SomeNewTitle")
                 .inputWhatArticleAbout( "about article")

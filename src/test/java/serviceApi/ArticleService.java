@@ -11,7 +11,6 @@ public class ArticleService extends BaseApiTest {
 
     public ArticleService(String token) {
         this.token = token;
-
     }
 
     public Article createArticle(Article article) {

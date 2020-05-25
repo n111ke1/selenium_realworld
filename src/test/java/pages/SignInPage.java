@@ -15,6 +15,11 @@ public class SignInPage extends BasePage{
 
     public HomePage login(String email, String password) {
         inputEmail(email);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         inputPassword(password);
         return clickSingInButton();
     }
