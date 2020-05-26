@@ -8,23 +8,16 @@ import io.restassured.http.ContentType;
 import models.User;
 import models.UserData;
 import models.UserResponce;
+import org.testng.annotations.Test;
 
-public class UserService extends BaseApiTest {
+public class UserService extends BaseApiService {
 
 
     public User login() {
         User defUser = UserData.defaultUser();
         UserResponce userResponce = new UserResponce();
         userResponce.setUser(defUser);
-            RestAssured.baseURI = "https://conduit.productionready.io";
-            RestAssured.basePath = "/api";
-            RestAssured.requestSpecification =
-                    new RequestSpecBuilder()
-                            .setAccept(ContentType.JSON)
-                            .setContentType(ContentType.JSON)
-                            .log(LogDetail.ALL)
-                            .build();
-
+        setUp();
         User userAuth =  RestAssured
                 .given()
                     .body(userResponce)
@@ -36,8 +29,24 @@ public class UserService extends BaseApiTest {
                     .as(UserResponce.class)
                     .getUser();
         userAuth.setPassword(defUser.getPassword());
-
       return userAuth;
+    }
+
+    public User registration(){
+     User userData = UserData.randomUser();
+     UserResponce userResponce = new UserResponce();
+     userResponce.setUser(userData);
+        setUp();
+        User newUser = RestAssured
+                .given()
+                .body(userResponce)
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(200)
+                .extract().body()
+                .as(UserResponce.class).getUser();
+    return newUser;
     }
 
 

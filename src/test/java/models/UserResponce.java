@@ -4,7 +4,6 @@ public class UserResponce {
 
     private User user;
 
-
     public User getUser() {
         return user;
     }
@@ -12,4 +11,5 @@ public class UserResponce {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

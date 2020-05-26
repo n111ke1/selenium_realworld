@@ -48,7 +48,5 @@ public class SignInPage extends BasePage{
         return driver.findElement(By.cssSelector(".auth-page form"));
     }
 
-    public String getErrorText(){
-        return getTextFromElement(driver.findElement(errorLoginFields));
-    }
+
 }

@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,7 +10,6 @@ import java.util.Date;
 public class User {
 
     private long id;
-
     private String token;
     private String bio;
     private String username;

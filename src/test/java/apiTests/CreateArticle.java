@@ -4,25 +4,20 @@ import io.restassured.RestAssured;
 import models.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import serviceApi.UserService;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateArticle extends BaseApiTest {
 
 
     @BeforeMethod
-    public AuthenticationToken authenticationToken(){
-        User defUser = UserData.defaultUser();
-        UserResponce userResponce = new UserResponce();
-        userResponce.setUser(defUser);
-        AuthenticationToken authenticationToken =  RestAssured
-                .given()
-                .body(userResponce)
-                .when()
-                .post("/users/login")
-                .then()
-                .statusCode(200)
-                .extract().body()
-                .as(AuthenticationToken.class);
-        return authenticationToken;
+    public User authenticationToken(){
+        User user;
+        UserService userService = new UserService();
+        user = userService.registration();
+        return user;
     }
 
 //    @Test
@@ -55,16 +50,21 @@ public class CreateArticle extends BaseApiTest {
     public void createArticle(){
         ArticleResponse articleResponse = new ArticleResponse();
         Article article = new Article();
+        article.setTitle("dwad");
+        article.setDescription("dwad");
+        article.setBody("dawdawd");
+        article.setTagList(Arrays.asList("test", "dawddad"));
         articleResponse.setArticle(article);
-       Article article1 = RestAssured.given()
-                       .param("token", authenticationToken())
-                .body(article)
+        Article article1 = RestAssured
+               .given()
+                    . header("Authorization", "Token " + authenticationToken().getToken())
+                    .body(article)
                 .when()
-                .post("/articles")
+                    .post("/articles")
                 .then()
-                .statusCode(200)
-               .extract().body()
-               .as(ArticleResponse.class).getArticle();
+                    .statusCode(200)
+                    .extract().body()
+                    .as(ArticleResponse.class).getArticle();
         System.out.println(article1);
     }
 
